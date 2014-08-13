@@ -1,9 +1,29 @@
 <?php
 /**
- * Bookmarks English language file
+ * Bookmarks Spanish language file
  */
 
-$english = array(
+$spanish = array(
+
+/**
+ * Sessions
+ */
+
+	'login' => "Log in",
+	'loginok' => "You have been logged in",
+	'loginerror' => "We couldn't log you in. Please check your credentials and try again",
+	'login:empty' => "Username/email and password are required",
+	'login:baduser' => "Unable to load your user account",
+	'auth:nopams' => "Internal error. No user authentication method installed",
+
+	'logout' => "Log out",
+	'logoutok' => "You have been logged out",
+	'logouterror' => "We couldn't log you out. Please try again",
+
+	'loggedinrequired' => "You must be logged in to view that page",
+	'adminrequired' => "You must be an administrator to view that page",
+	'membershiprequired' => "You must be a member of this group to view that page",
+
 
 	/**
 	 * Menu items and titles
@@ -76,6 +96,31 @@ $english = array(
 
 	'bookmarks:save:failed' => "Your bookmark could not be saved. Make sure you've entered a title and address and then try again.",
 	'bookmarks:delete:failed' => "Your bookmark could not be deleted. Please try again.",
+
+    'kPAX:play' => "Juegos",
+    'kPAX:devs' => "Desarrolla",
+    'kpax:add' => "Añadir juego",
+    'kPAX:game:name' => "Nombre del juego (*)",
+    'kPAX:game:description' => "Descripción",
+    'kPAX:game:logo' => "Logo&oacute;",
+    'kPAX:game:logo' => "Logo (url de la imagen cuadrada)",
+    'kPAX:game:banner' => "Banner del juego (url de la imagen)",
+    'kPAX:game:videourl' => "Url del Video del juego (url de youtube)",
+    'kPAX:game:images' => "Inserta tantas imágenes como quieras, pon las URL separadas por un espacio",
+    'kPAX:game:skills' => "Competencias",
+    'kPAX:game:category' => "Categoría/s del juego",
+	'kPAX:game:platforms' => "Plataformas disponibles",
+    'kPAX:game:creationDate' => "Fecha de creación",
+    'kPAX:game:tags' => "Etiquetas (tags) relacionadas",
+    'kPAX:game:csr_file' => "Fichero de petición de certificado [.csr] (*)",
+    'kPAX:game:send' => "¡Envía mi juego!",
+    'kPAX:myGames' => "Mis juegos",
+    'kPAX:noGames' => "Todavía no tienes juegos en kPAX",
+    'kPAX:my_dev_games' => "Mis juegos (desarrollados)",
+    'kpax:tagline' => '¡Juguemos en serio!',
+	'kpax:dragdrop' => 'También puedes arrastrar una imagen desde el escritorio'
 );
 
-add_translation('en', $english);
+add_translation('es', $spanish);
+
+?>

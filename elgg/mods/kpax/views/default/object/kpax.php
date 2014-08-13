@@ -43,9 +43,6 @@ if ($kpax->comments_on != 'Off') {
     $comments_link = '';
 }
 
-
-
-
 $metadata = elgg_view_menu('entity', array(
     'entity' => $vars['entity'],
     'handler' => 'kpax',
@@ -73,10 +70,11 @@ if ($full) {
 
 
     $objScore = $objKpax->getScore($objGame->secretGame);
-
+    $objCategory = $objKpax->getCategory($_SESSION["campusSession"], $kpax->idCategory); //NOU
 
     $body = elgg_view('output/longtext', array(
-        'value' => $kpax->description . '<br>' . $contentFooter,
+//NOU - Línia modificada        
+        'value' => $kpax->description . '<br>' . "Category: " . $objCategory->name . '<br>' . "Date of creation: " . $kpax->creationDate . '<br>' . $contentFooter,
         'class' => 'kpax-post',
             ));
 
@@ -90,7 +88,6 @@ if ($full) {
         'tags' => $tags,
     );
     $params = $params + $vars;
-
 
     $list_body = elgg_view('object/elements/summary', $params);
 

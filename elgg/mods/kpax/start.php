@@ -9,9 +9,9 @@ function kpax_init() {
     if (!update_subtype('object', 'kpax', 'ElggKpax')) {
             add_subtype('object', 'kpax', 'ElggKpax');
     }
-    
-    
-    elgg_register_action("kpax/save", dirname(__FILE__) . "/actions/kpax/save.php");
+
+//    elgg_register_view('kpax/devs_explanations');
+//    elgg_register_action("kpax/save", "$root/actions/kpax/save.php"); REDUNDANT - Definit a baix
 
     elgg_register_page_handler('kpax', 'kpax_page_handler');
 
@@ -19,11 +19,8 @@ function kpax_init() {
 
     elgg_register_entity_type('object', 'kpax');
 
+
     elgg_register_library('elgg:kpax', "$root/lib/kpax.php");
-    
-    
-    
-    
     elgg_register_library('elgg:kpaxSrv', "$root/lib/kpaxSrv.php");
     elgg_register_library('elgg:kpaxOauth', "$root/lib/kpaxOauth.php");
     elgg_register_library('elgg:kpaxOauthLib', "$root/lib/Oauth.php");
@@ -39,10 +36,17 @@ function kpax_init() {
     elgg_register_action('kpax/delete', "$action_path/delete.php");
 
     // menus
+
     elgg_register_menu_item('site', array(
-        'name' => 'game',
-        'text' => elgg_echo('Games'),
-        'href' => 'kpax/all'
+        'name' => 'play',
+        'text' => elgg_echo('kPAX:play'),
+        'href' => 'kpax/play'
+    ));
+
+    elgg_register_menu_item('site', array(
+        'name' => 'developers',
+        'text' => elgg_echo('kPAX:devs'),
+        'href' => 'kpax/devs'
     ));
 
     // WS AUTH USER
@@ -64,7 +68,7 @@ function kpax_init() {
         }
     }
 
-    expose_function("user.auth", "auth_user", array("username" => array('type' => 'String', 'required' => true), "password" => array('type' => 'String', 'required' => true)), 'Auth user ellg', 'GET', true, false);
+    expose_function("user.auth", "auth_user", array("username" => array('type' => 'String', 'required' => true), "password" => array('type' => 'String', 'required' => true)), 'Auth user elgg', 'GET', true, false);
 
     function auth_sign($username="") {
 
@@ -83,27 +87,14 @@ function kpax_init() {
     expose_function("auth.sign", "auth_sign", array("username" => array('type' => 'String', 'required' => true)), 'Auth sign ellg', 'GET', true, false);
 }
 
-/**
- * Dispatcher for kpax.
- *
- * URLs take the form of
- *  All bookmarks:        bookmarks/all
- *  User's bookmarks:     bookmarks/owner/<username>
- *  Friends' bookmarks:   bookmarks/friends/<username>
- *  View bookmark:        bookmarks/view/<guid>/<title>
- *  New bookmark:         bookmarks/add/<guid> (container: user, group, parent)
- *  Edit bookmark:        bookmarks/edit/<guid>
- *  Group bookmarks:      bookmarks/group/<guid>/all
- *  Bookmarklet:          bookmarks/bookmarklet/<guid> (user)
- *
- * Title is ignored
- *
- * @param array $page
- */
+
 function kpax_page_handler($page) {
 
 
-    elgg_push_breadcrumb(elgg_echo('Games'), 'kpax/all');
+    elgg_push_breadcrumb(elgg_echo('kPAX:play'), 'kpax/play');
+    elgg_push_breadcrumb(elgg_echo('kPAX:devs'), 'kpax/devs');
+    elgg_push_breadcrumb(elgg_echo('Games'), 'kpax/all');   //NOU  ???
+
 
     // old group usernames
     if (substr_count($page[0], 'group:')) {
@@ -160,6 +151,19 @@ function kpax_page_handler($page) {
         case "bookmarklet":
             set_input('container_guid', $page[1]);
             include "$pages/bookmarklet.php";
+            break;
+
+        case "play":
+            include "$pages/play.php";
+            break;
+
+        case "devs":
+            include "$pages/devs.php";
+            break;
+
+        case "my_dev_games":
+            //gatekeeper();
+            include "$pages/my_dev_games.php";
             break;
 
         default:
@@ -219,7 +223,7 @@ function kpax_url($entity) {
 
     $title = $entity->title;
     $title = elgg_get_friendly_title($title);
-    return $CONFIG->url . "kpax/view/" . $entity->getGUID() . "/" . $title;
+    return $CONFIG->url . "kpax/views/" . $entity->getGUID() . "/" . $title; //He canviat kpax/view per kpax/views
 }
 
-?>
+?> 

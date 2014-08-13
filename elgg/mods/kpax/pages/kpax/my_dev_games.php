@@ -1,45 +1,21 @@
 <?php
-/**
- * Elgg kpax plugin everyone page
- *
- * @package kpax
- */
 
-$page_owner = elgg_get_page_owner_entity();
-
-elgg_push_breadcrumb($page_owner->name);
+$title = elgg_echo('kpax:all');
 
 elgg_register_title_button();
 
-$offset = (int)get_input('offset', 0);
-
-
-/*
-$content .= elgg_list_entities(array(
-	'type' => 'object',
-	'subtype' => 'kpax',
-	'container_guid' => $page_owner->guid,
-	'limit' => 10,
-	'offset' => $offset,
-	'full_view' => false,
-	'view_toggle_type' => false
-));
-*/
-
-//NOU
 //DEFAULT OPTIONS FOR ELGG LISTING. All games.
 $options = array(
-	'type' => 'object',
-	'subtype' => 'kpax',
-	'container_guid' => $page_owner->guid,
-	'limit' => 10,
-	'offset' => $offset,
-	'full_view' => false,
-	'view_toggle_type' => false
-);
+    'types' => 'object',
+    'subtypes' => 'kpax',
+    'limit' => 10,
+    'full_view' => false,
+        );
 
 //GETTING THE GAME LIST FROM SRVKPAX
 $objKpax = new kpaxSrv(elgg_get_logged_in_user_entity()->username);
+
+/*
 //Parameters
 $idFilterer = $_SESSION['gameListFilter'];
 $idOrderer = $_SESSION['gameListOrder'];
@@ -48,7 +24,7 @@ $values = $_SESSION['gameListValues'];
 
 if(!isset($idFilterer))
 {
-	$idFilterer = 0; //Default filterer: fo not filter.
+	$idFilterer = 0; //Default filterer: do not filter.
 	$_SESSION['gameListFilter'] = $idFilterer;
 }
 if(!isset($idOrderer))
@@ -64,8 +40,14 @@ if(!isset($fields))
 	$_SESSION['gameListFields'] = $fields;
 	$_SESSION['gameListValues'] = $values;
 }
+*/
 
-$gameList = $objKpax->getListGames($_SESSION["campusSession"], $idOrderer, $idFilterer, $fields, $values);
+//$page_owner = elgg_get_page_owner_entity();
+$page_owner = "admin";
+$gameList = $objKpax->getUserListGames($page_owner,$_SESSION["campusSession"]);
+
+// FALLA ABANS!!! DEBUGGAR!!!
+
 if(isset($gameList))
 {
 	system_message(elgg_echo('kpax:list:success'));
@@ -94,31 +76,19 @@ else
 
 //LISTING THE GAMES. All games by default when srvKpax fails.
 $content = elgg_list_entities($options);
-//FINOU
 
 if (!$content) {
-	$content = elgg_echo('kpax:none');
+    $content = '<p>' . elgg_echo('kpax:none') . '</p>';
 }
 
-$title = elgg_echo('kpax:owner', array($page_owner->name));
-
-$filter_context = '';
-if ($page_owner->getGUID() == elgg_get_logged_in_user_guid()) {
-	$filter_context = 'mine';
-}
-
-$vars = array(
-	'filter_context' => $filter_context,
-	'content' => $content,
-	'title' => $title,
-	'sidebar' => elgg_view('kpax/sidebar'),
-);
-
-// don't show filter if out of filter context
-if ($page_owner instanceof ElggGroup) {
-	$vars['filter'] = false;
-}
-
-$body = elgg_view_layout('content', $vars);
+$body = elgg_view_layout('content', array(
+    'filter_context' => 'all',
+    'content' => $content,
+    'title' => $title,
+    'sidebar' => elgg_view('kpax/sidebar'),
+        ));
+echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $container_guid));
 
 echo elgg_view_page($title, $body);
+
+?>

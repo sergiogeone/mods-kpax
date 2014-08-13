@@ -22,6 +22,8 @@ function kpax_prepare_form_vars($kpax = null) {
 		'container_guid' => elgg_get_page_owner_guid(),
 		'guid' => null,
 		'entity' => $kpax,
+		'category' => get_input('category', '1'), //NOU
+		'creationDate' => get_input('category', date("d-m-Y H:i:s")) //NOU
 	);
 
 	if ($kpax) {

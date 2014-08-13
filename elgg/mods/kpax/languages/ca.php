@@ -1,9 +1,28 @@
 <?php
 /**
- * Bookmarks English language file
+ * Bookmarks Catalan language file
  */
 
-$english = array(
+$catalan = array(
+
+/**
+ * Sessions
+ */
+
+	'login' => "Valida",
+	'loginok' => "Has completat la teva validaci&oacute;",
+	'loginerror' => "No hem pogut validar-te. Prova de nou",
+	'login:empty' => "Requereix nom d'usuari/correu electr&ograve;nic i paraula de pas",
+	'login:baduser' => "No es pot carregar el teu compte d'usuari",
+	'auth:nopams' => "Error intern. No hi ha m&egrave;tode de validaci&oacute; instal·lat",
+
+	'logout' => "Surt",
+	'logoutok' => "Has sortit de kPAX",
+	'logouterror' => "No s'ha pogut sortir. Si us plau, prova de nou",
+
+	'loggedinrequired' => "Has d'estar validat per veure aquesta p&agrave;gina",
+	'adminrequired' => "Has de ser administrador per veure aquesta p&agrave;gina",
+	'membershiprequired' => "Has de ser un membre d'aquest grup per veure aquesta p&agrave;gina",
 
 	/**
 	 * Menu items and titles
@@ -52,7 +71,7 @@ $english = array(
 	/**
 	 * Widget and bookmarklet
 	 */
-	'bookmarks:widget:description' => "Display your latest bookmarks.",
+	'bookmarks:widget:description' => "Display your latest bookmarks",
 
 	'bookmarks:bookmarklet:description' =>
 			"The bookmarks bookmarklet allows you to share any resource you find on the web with your friends, or just bookmark it for yourself. To use it, simply drag the following button to your browser's links bar:",
@@ -76,6 +95,31 @@ $english = array(
 
 	'bookmarks:save:failed' => "Your bookmark could not be saved. Make sure you've entered a title and address and then try again.",
 	'bookmarks:delete:failed' => "Your bookmark could not be deleted. Please try again.",
+
+    'kPAX:play' => "Jocs",
+    'kPAX:devs' => "Desenvolupa",
+    'kPAX:add' => "Afegeix joc",
+    'kPAX:game:name' => "Nom del joc (*)",
+    'kPAX:game:description' => "Descripci&oacute;",
+    'kPAX:game:logo' => "Logo&oacute;",
+    'kPAX:game:logo' => "Logo (url de l'imatge cuadrada)",
+    'kPAX:game:banner' => "Banner del joc (url de l'imagen)",
+    'kPAX:game:videourl' => "Url del Video del joc (url de youtube)",
+    'kPAX:game:images' => "Insereix tantes imatges com vulguis, posa les URL separades per un espai",
+    'kPAX:game:skills' => "Compet&egrave;ncies (*)",
+    'kPAX:game:category' => "Categoria/es del joc",
+    'kPAX:game:platforms' => "Plataformes disponibles",
+    'kPAX:game:creationDate' => "Data de creaci&oacute;",
+    'kPAX:game:tags' => "Etiquetes (tags) associades",
+    'kPAX:game:csr_file' => "Fitxer de petici&oacute; de certificat [.csr] (*)",
+    'kPAX:game:send' => "Envia el meu joc!",
+    'kPAX:myGames' => "Els meus jocs",
+    'kPAX:noGames' => "Encara no tens jocs a kPAX",
+    'kPAX:my_dev_games' => "Els meus jocs (desenvolupats)",
+    'kpax:tagline' => 'Juguem seriosament!',
+	'kpax:dragdrop' => 'També pots arrossegar una imatge desde l\'escriptori'
 );
 
-add_translation('en', $english);
+add_translation('ca', $catalan);
+
+?>
