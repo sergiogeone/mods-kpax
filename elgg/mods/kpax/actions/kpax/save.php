@@ -3,6 +3,7 @@
 $objKpax = new kpaxSrv(elgg_get_logged_in_user_entity()->username);
 gatekeeper();
 
+
 // get the form input
 $title = get_input('title');
 $description = get_input('description');
@@ -31,7 +32,6 @@ if ($guid == 0) { // New game
         forward(REFERRER);
     }
     $listGameImgs = $objKpax->getGameImages($_SESSION["campusSession"], $guid);
-    error_log(print_r(count($listGameImgs), TRUE));
     for ($n = 0; $n < count($listGameImgs); $n++) {
         error_log(print_r('image' . $listGameImgs[$n]->idGameImage, TRUE));
         $img = get_input('image' . $listGameImgs[$n]->idGameImage);
@@ -41,7 +41,6 @@ if ($guid == 0) { // New game
                 register_error(elgg_echo('kpax:save:failed:service'));
             }
         }
-
     }
 }
 
@@ -100,6 +99,7 @@ else
 
 // forward user to a page that displays the developer's games information
 system_message($kPAXgame->getURL());
+
 forward('kpax/play');
 //forward('kpax/my_dev_games'); SUBSTITUIR PER L'ANTERIOR QUAN ESTIGUI ARREGLAT
 ?>

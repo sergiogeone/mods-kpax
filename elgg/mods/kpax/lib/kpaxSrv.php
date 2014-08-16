@@ -178,6 +178,17 @@ class kpaxSrv {
         return $listGames;
     }
 
+    public function getUnauthorizedGames($campusSession) {
+        $listGames = json_decode($this->service("game/" . $campusSession . "/getUnauthorizedList/"));
+        return $listGames;
+    }
+
+    public function authorizeGame($campusSession, $idGame) {
+        $body = 'secretSession=' . $campusSession . '&idGame=' . $idGame;
+        return $this->service("game/" . $idGame . "/auth", "POST", $body);
+    }
+    
+
 //Fi NOU
 }
 

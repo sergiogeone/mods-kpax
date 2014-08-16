@@ -34,13 +34,14 @@ if(!isset($fields))
 }
 $userGameList = $objKpax->getDeveloperGames($_SESSION["campusSession"], elgg_get_logged_in_user_entity()->username);
 $notUserGameList = $objKpax->getNotDeveloperGames($_SESSION["campusSession"], elgg_get_logged_in_user_entity()->username);
+$unauthorizedGames = $objKpax->getUnauthorizedGames($_SESSION["campusSession"]);
 
 if(isset($notUserGameList))
 {
     //system_message(elgg_echo('kpax:list:success'));
     //$content = '<p>' . elgg_echo($gameList[1]->name). '</p>';
     //$content = '<p>' . elgg_echo("HOLA"). '</p>';  
-    $content = elgg_view('kpax/games_list', array('objGameList' => $notUserGameList, 'objUserGameList' => $userGameList, 'template' => "list"));
+    $content = elgg_view('kpax/games_list', array('objGameList' => $notUserGameList, 'objUserGameList' => $userGameList, 'objUnauthGameList' => $unauthorizedGames, 'template' => "list"));
     //var_dump($content);
 }
 else
